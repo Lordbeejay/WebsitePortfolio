@@ -1,0 +1,31 @@
+:root {
+  --bg-dark: #0a0c10;
+  --bg-card: #151921;
+  --accent-lime: #d4ff3f;
+  --accent-blue: #00d2ff;
+  --text-gray: #94a3b8;
+}
+
+body {
+  background-image: url('/wallpaper.jpg'); /* place your image in public/ */
+  background-size: cover;        /* cover the entire area */
+  background-position: center;   /* center the image */
+  background-repeat: no-repeat;  /* prevent tiling */
+  background-attachment: fixed;  /* optional parallax effect */
+  font-family: sans-serif;       /* optional */
+  animation: slideZoom 50s linear infinite;
+}
+@keyframes slideZoom {
+  0% { background-position: 0% 0%; background-size: 120%; }
+  50% { background-position: 100% 0%; background-size: 130%; }
+  100% { background-position: 0% 0%; background-size: 120%; }
+}
+.glow-gradient {
+  background: radial-gradient(circle at center, #1e293b 0%, #0a0c10 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #fff, var(--accent-lime));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

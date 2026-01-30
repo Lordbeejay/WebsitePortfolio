@@ -1,0 +1,291 @@
+/* Override global overflow hidden for About page */
+body:has(.about-container) {
+  overflow: auto !important;
+}
+
+#root:has(.about-container) {
+  overflow: auto !important;
+}
+
+/* About Page Container */
+.about-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 5%;
+  height: 100vh;
+  max-height: 100vh;
+  background-color: #000;
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Left Section - GIF Animation */
+.about-left-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.about-gif-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.about-gif-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  min-height: 0;
+}
+
+.about-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Right Section */
+.about-right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 0;
+  padding-right: 0.5rem;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar for Right Section */
+.about-right-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.about-right-section::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.about-right-section::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 10px;
+}
+
+.about-right-section::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.5);
+}
+
+/* About Me Box */
+.about-me-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Languages Box */
+.about-languages-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Courses Box */
+.about-courses-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Typography */
+.about-section-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  margin-top: 0;
+  background: linear-gradient(270deg, #00eaff, #7f5cff, #ff4ecd);
+  background-size: 600% 600%;
+  animation: gradientMove 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-sub-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0;
+}
+
+.about-text {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  text-align: justify;
+}
+
+/* Skills Grid */
+.about-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.about-skill-tag {
+  background: rgba(56, 189, 248, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  padding: 0.5rem 1rem 0.5rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.about-skill-tag::before {
+  content: '';
+  width: 0;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: rotate(-180deg) scale(0);
+}
+
+.about-skill-tag:hover::before {
+  width: 20px;
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.about-skill-tag:hover {
+  background: rgba(56, 189, 248, 0.3);
+  border-color: rgba(56, 189, 248, 0.6);
+  transform: translateY(-2px);
+  padding-left: 1rem;
+}
+
+/* Individual language logos */
+.about-skill-tag[data-skill="javascript"]::before {
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg');
+}
+
+.about-skill-tag[data-skill="typescript"]::before {
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg');
+}
+
+.about-skill-tag[data-skill="python"]::before {
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg');
+}
+
+.about-skill-tag[data-skill="java"]::before {
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg');
+}
+
+.about-skill-tag[data-skill="html"]::before {
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg');
+}
+
+.about-skill-tag[data-skill="sql"]::before {
+  background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg');
+}
+
+/* Course List */
+.about-course-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-course-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.about-course-item:last-child {
+  border-bottom: none;
+}
+
+.about-course-item:hover {
+  color: #38bdf8;
+  padding-left: 0.5rem;
+}
+
+/* Animations */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .about-container {
+    flex-direction: column;
+  }
+
+  .about-left-section {
+    min-height: 300px;
+    max-height: 40vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 1.5rem 3%;
+  }
+
+  .about-section-title {
+    font-size: 1.1rem;
+  }
+
+  .about-sub-title {
+    font-size: 1rem;
+  }
+
+  .about-gif-box,
+  .about-me-box,
+  .about-languages-box,
+  .about-courses-box {
+    padding: 1.25rem;
+  }
+}

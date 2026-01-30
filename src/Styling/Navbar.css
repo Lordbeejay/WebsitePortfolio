@@ -1,0 +1,316 @@
+/* From Uiverse.io by 2009_4928 */ 
+:root {
+  --primary-color: #38bdf8; /* your main accent color */
+  --secondary-color: #8b5cf6; /* optional secondary color */
+  --background-color: #0a0c12;
+  --text-color: #e0e7ff;
+}
+.submit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: transparent;
+  text-transform: uppercase;
+  border: 0.1vw solid rgb(50, 50, 50);
+  box-shadow:
+    0 0 0.5vw black,
+    0 0 0.5vw 0.1vw transparent,
+    0vw 0 2vw -0.5vw black,
+    0vw 0 2vw -0.5vw black,
+    0 -1vw 1vw -1vw transparent inset;
+  padding: 0.4vw 0.55vw;
+  width: 8vw;
+  height: 2vw;
+  border-radius: 0.2vw;
+  cursor: pointer;
+  text-shadow: 0.05vw 0 0 white;
+  font-size: 0.8vw;
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  font-family: arial;
+  letter-spacing: 0.2vw;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.submit:after {
+  content: "Contact";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: transparent;
+  text-shadow: 1.8vw 1.8vw 1.2vw white;
+  text-transform: uppercase;
+  font-size: 0.8vw;
+  letter-spacing: 5.2vw;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.submit:hover:after,
+.submit:focus:after {
+  letter-spacing: 0.28vw;
+  text-shadow: 0.08vw 0vw 0 var(--secondary-color);
+}
+
+.submit:before {
+  content: "Contact";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: transparent;
+  text-shadow: 1.8vw -2vw 1.2vw var(--secondary-color);
+  text-transform: uppercase;
+  font-size: 0.8vw;
+  letter-spacing: 5.2vw;
+  -webkit-transition: 0.8s;
+  transition: 0.8s;
+}
+
+.submit:hover:before,
+.submit:focus:before {
+  letter-spacing: 0.28vw;
+  text-shadow: 0.08vw 0vw 0.08vw var(--secondary-color);
+}
+
+.submit:hover,
+.submit:focus {
+  box-shadow:
+    0 0 2vw black,
+    0 0 1.2vw 0.1vw black,
+    4vw 0 2vw -0.5vw var(--primary-color),
+    -4vw 0 2vw -0.5vw var(--primary-color),
+    0 -1vw 1vw -1vw var(--primary-color) inset;
+  -webkit-transform: scale(1.15, 1.15);
+  transform: scale(1.15, 1.15);
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 1.25vw;
+  letter-spacing: 1.28vw;
+  padding: 0.4vw 1vw;
+  text-shadow: 0 0 2vw white;
+  border-bottom: 0.1vw solid rgb(255, 0, 105);
+}
+
+/* From Uiverse.io by Cornerstone-04 */ 
+.box {
+  width: 140px;
+  height: auto;
+  float: left;
+  transition: .5s linear;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 15px;
+  text-align: center;
+  margin: 0 5px;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 900;
+  color:white;
+}
+
+.box:before {
+  position: absolute;
+  content: '';
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 100%;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid transparent;
+  box-sizing: border-box;
+  transform: translateX(100%);
+}
+
+.box:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-top: 4px solid transparent;
+  border-right: 4px solid transparent;
+  box-sizing: border-box;
+  transform: translateX(-100%);
+}
+
+.box:hover {
+  box-shadow: 0 5px 15px rgba(3, 137, 167, 0.5);
+}
+
+.box:hover:before {
+  border-color: #d9f99d;
+  height: 100%;
+  transform: translateX(0);
+  transition: .3s transform linear, .3s height linear .3s;
+}
+
+.box:hover:after {
+  border-color: #262626;
+  height: 100%;
+  transform: translateX(0);
+  transition: .3s transform linear, .3s height linear .5s;
+}
+
+button {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: transparent;
+}
+/* Contact Modal Styles */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+/* Contact card */
+.contact-card {
+  background-color: #1a1a1a;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1),
+              0 0 30px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Card header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-title {
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
+/* Form styles */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  color: #fff;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.form-input,
+.form-textarea {
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.form-textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.submit-btn-form {
+  margin-top: 1rem;
+  width: 100%;
+}

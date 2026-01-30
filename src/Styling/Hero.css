@@ -1,0 +1,68 @@
+.hero-container {
+  width: 100%;
+  height: 100vh; /* Exactly the height of the screen */
+  max-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Start from top */
+  overflow: hidden; /* Prevents scrollbars */
+  padding: 20px 0; /* Minimal padding */
+  
+  background-image: linear-gradient(rgba(10, 12, 18, 0.7), rgba(10, 12, 18, 0.7)), url("/wallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%; /* Fill the container */
+  width: 100%;
+}
+
+.main-title {
+  font-weight: 900;
+  color: #ffffff;
+  /* Scales font based on screen size so it never gets too big */
+  font-size: clamp(2.5rem, 6vw, 4rem); 
+  line-height: 1.1;
+  margin: 0;
+}
+
+.sub-title {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  margin: 10px 0 20px 0;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-dialogue-wrapper {
+  width: 90%;
+  max-width: 650px;
+  margin: 0 auto;
+  /* Prevents the dialogue box from getting too tall */
+  max-height: 25vh; 
+}
+
+.expertise-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.glass-card {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 300px;
+  text-align: left;
+}
