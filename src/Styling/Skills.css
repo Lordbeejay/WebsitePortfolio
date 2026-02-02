@@ -174,7 +174,9 @@ body:has(.skills-section) {
 .carousel-item[data-skill="figma"]::before {
   background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg');
 }
-
+.popup-descriptions{
+  text-decoration:underline;
+}
 /* Popup Overlay */
 .skill-popup-overlay {
   position: fixed;

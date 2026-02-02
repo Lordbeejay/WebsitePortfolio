@@ -1,7 +1,6 @@
 import React from 'react';
 
 import  Skills from './Pages/Skills';
-import { Bio } from './Components/Bio';
 import { Navbar } from './Components/navbar';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';

@@ -1,60 +1,196 @@
 import React from 'react';
+import { motion, type Variants } from 'framer-motion';
 import '../Styling/About.css';
 
 const About: React.FC = () => {
+  // Container animation variants
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  // Left section animation
+  const leftSectionVariants: Variants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 50,
+        damping: 20
+      }
+    }
+  };
+
+  // Right section boxes animation
+  const boxVariants: Variants = {
+    hidden: { opacity: 0, x: 100, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        type: "spring" as const,
+        stiffness: 60,
+        damping: 15
+      }
+    }
+  };
+
+  // Skill tag animation
+  const skillVariants: Variants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: (i: number) => ({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: i * 0.1,
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 10
+      }
+    })
+  };
+
+  // Course item animation
+  const courseVariants: Variants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: i * 0.1
+      }
+    })
+  };
+
+  const skills = [
+    { name: "JavaScript", skill: "javascript" },
+    { name: "TypeScript", skill: "typescript" },
+    { name: "Python", skill: "python" },
+    { name: "Java", skill: "java" },
+    { name: "HTML/CSS", skill: "html" },
+    { name: "SQL", skill: "sql" }
+  ];
+
+  const courses = [
+    "Web Development Bootcamp",
+    "Advanced React & Redux",
+    "Data Structures & Algorithms",
+    "Cloud Computing with AWS",
+    "Mobile App Development"
+  ];
+
   return (
-    <div className="about-container">
-      <div className="about-left-section">
+    <motion.div 
+      className="about-container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div 
+        className="about-left-section"
+        variants={leftSectionVariants}
+      >
         <div className="about-gif-box">
-          <h2 className="about-section-title">Josaiah L. Borres</h2>
+          <motion.h2 
+            className="about-section-title"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            Josaiah L. Borres
+          </motion.h2>
           <div className="about-gif-placeholder">
-            <img 
+            <motion.img 
               src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" 
               alt="Coding animation"
               className="about-gif"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
             />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="about-right-section">
-        <div className="about-me-box">
+        <motion.div 
+          className="about-me-box"
+          variants={boxVariants}
+        >
           <h2 className="about-section-title">ABOUT ME</h2>
-          <p className="about-text">
+          <motion.p 
+            className="about-text"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          >
             I'm a passionate full-stack developer with a love for creating elegant solutions 
             to complex problems. With expertise in modern web technologies, I specialize in 
             building responsive, user-friendly applications that make a difference.
-          </p>
-          <p className="about-text">
+          </motion.p>
+          <motion.p 
+            className="about-text"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+          >
             When I'm not coding, you can find me exploring new technologies, contributing to 
             open-source projects, or sharing knowledge with the developer community.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="about-languages-box">
+        <motion.div 
+          className="about-languages-box"
+          variants={boxVariants}
+        >
           <h3 className="about-sub-title">Languages</h3>
           <div className="about-skills-grid">
-            <span className="about-skill-tag" data-skill="javascript">JavaScript</span>
-            <span className="about-skill-tag" data-skill="typescript">TypeScript</span>
-            <span className="about-skill-tag" data-skill="python">Python</span>
-            <span className="about-skill-tag" data-skill="java">Java</span>
-            <span className="about-skill-tag" data-skill="html">HTML/CSS</span>
-            <span className="about-skill-tag" data-skill="sql">SQL</span>
+            {skills.map((skill, index) => (
+              <motion.span
+                key={skill.skill}
+                className="about-skill-tag"
+                data-skill={skill.skill}
+                custom={index}
+                variants={skillVariants}
+                whileHover={{ scale: 1.1, rotate: 2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {skill.name}
+              </motion.span>
+            ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="about-courses-box">
+        <motion.div 
+          className="about-courses-box"
+          variants={boxVariants}
+        >
           <h3 className="about-sub-title">Courses Taken</h3>
           <ul className="about-course-list">
-            <li className="about-course-item">Web Development Bootcamp</li>
-            <li className="about-course-item">Advanced React & Redux</li>
-            <li className="about-course-item">Data Structures & Algorithms</li>
-            <li className="about-course-item">Cloud Computing with AWS</li>
-            <li className="about-course-item">Mobile App Development</li>
+            {courses.map((course, index) => (
+              <motion.li
+                key={index}
+                className="about-course-item"
+                custom={index}
+                variants={courseVariants}
+                whileHover={{ x: 10, color: "#38bdf8" }}
+              >
+                {course}
+              </motion.li>
+            ))}
           </ul>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
