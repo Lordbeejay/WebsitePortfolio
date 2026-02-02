@@ -1,6 +1,5 @@
 import { motion, type Variants } from 'framer-motion';
 import { Hero } from '../Components/Hero';
-import { Navbar } from '../Components/navbar';
 import '../App.css';
 
 const Main = () => {
