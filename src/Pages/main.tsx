@@ -25,11 +25,13 @@ const S: Record<string, React.CSSProperties> = {
   root: {
     background: '#020207',
     minHeight: '100vh',
-    width: '100vw',
-    overflow: 'hidden',
+    width: '100%',               // ✅ was 100vw — causes horizontal overflow when scrollbar present
+    overflowX: 'hidden',         // ✅ only block horizontal, allow vertical
     position: 'relative',
     fontFamily: "'Syne', sans-serif",
     cursor: 'none',
+    display: 'flex',             // ✅ flex column so stats flow below hero naturally
+    flexDirection: 'column',
   },
   cursor: {
     position: 'fixed',
@@ -135,6 +137,7 @@ const S: Record<string, React.CSSProperties> = {
     padding: '0 60px',
     paddingTop: 100,
     zIndex: 2,
+    flex: 1,                     // ✅ takes available space in flex column
   },
   leftCol: {
     display: 'flex',
@@ -240,14 +243,15 @@ const S: Record<string, React.CSSProperties> = {
     color: 'rgba(255,255,255,0.15)',
     textTransform: 'uppercase' as const,
   },
+  // ✅ FIXED: was position:absolute which breaks in prod when page height differs
   statsRow: {
-    position: 'absolute' as const,
-    bottom: 60, left: 60, right: 60,
+    position: 'relative' as const,
     display: 'flex',
     gap: 60,
     zIndex: 3,
     borderTop: '1px solid rgba(255,255,255,0.06)',
-    paddingTop: 32,
+    padding: '32px 60px 60px',
+    marginTop: 'auto',
   },
   statItem: { display: 'flex', flexDirection: 'column' as const, gap: 6 },
   statNum: { fontSize: 32, fontWeight: 800, color: '#fff', lineHeight: 1 },
@@ -503,52 +507,56 @@ const Main = () => {
   return (
     <>
       <style>{`
+        /*
+         * ── IMPORTANT ──────────────────────────────────────────────────────────
+         * Move this @import into your index.html <head> for prod/dev parity:
+         *
+         * <link rel="preconnect" href="https://fonts.googleapis.com" />
+         * <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+         * <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+         *
+         * Keeping it here as a fallback only.
+         */
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap');
+
         *, *::before, *::after { box-sizing: border-box; }
-        html, body { margin: 0; padding: 0; background: #020207; }
+
+        html {
+          margin: 0;
+          padding: 0;
+          background: #020207;
+          /* ✅ Prevents layout shift between pages with/without scrollbar */
+          scrollbar-gutter: stable;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          background: #020207;
+          /* ✅ Prevents 100vw != 100% mismatch caused by scrollbar width */
+          overflow-x: hidden;
+        }
+
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
         .nl:hover { color: rgba(232,168,124,0.9) !important; }
         .cp:hover  { background: #f0c49a !important; }
 
         /* ── MOBILE RESPONSIVE ── */
         @media (max-width: 768px) {
-          /* Hide custom cursor on touch devices */
           body { cursor: auto !important; }
 
-          /* Nav */
-          .main-nav {
-            padding: 18px 20px !important;
-          }
-          .main-nav-logo {
-            font-size: 11px !important;
-            letter-spacing: 0.2em !important;
-          }
-          .main-nav-links {
-            display: none !important;
-          }
-          .main-nav-status {
-            display: none !important;
-          }
+          .main-nav { padding: 18px 20px !important; }
+          .main-nav-logo { font-size: 11px !important; letter-spacing: 0.2em !important; }
+          .main-nav-links { display: none !important; }
+          .main-nav-status { display: none !important; }
 
-          /* Hero: stack columns */
           .main-hero {
             grid-template-columns: 1fr !important;
             padding: 0 20px !important;
             padding-top: 90px !important;
             min-height: auto !important;
-            padding-bottom: 280px !important;
+            padding-bottom: 40px !important;
           }
 
-          /* Left col */
-          .main-left-col {
-            align-items: flex-start;
-          }
-          .main-status-badge {
-            margin-bottom: 24px !important;
-          }
-          .main-heading-wrap {
-            margin-bottom: 4px !important;
-          }
           .main-subtext {
             font-size: 13px !important;
             margin-top: 20px !important;
@@ -560,60 +568,30 @@ const Main = () => {
             align-items: flex-start !important;
             gap: 16px !important;
           }
-          .main-cta-primary {
-            padding: 14px 28px !important;
-            font-size: 11px !important;
-          }
+          .main-cta-primary { padding: 14px 28px !important; font-size: 11px !important; }
 
-          /* Right col: 3D viewer below text */
           .main-right-col {
             height: 280px !important;
             position: relative !important;
             margin-top: 32px !important;
           }
-          .main-canvas-wrap {
-            height: 100% !important;
-          }
-          .main-orbit-ring {
-            display: none !important;
-          }
+          .main-canvas-wrap { height: 100% !important; }
+          .main-orbit-ring { display: none !important; }
+          .main-scroll-indicator { display: none !important; }
 
-          /* Scroll indicator: hide on mobile */
-          .main-scroll-indicator {
-            display: none !important;
-          }
-
-          /* Stats row: make it static, not absolute */
           .main-stats-row {
-            position: relative !important;
-            bottom: auto !important;
-            left: auto !important;
-            right: auto !important;
-            margin: 0 20px !important;
-            padding: 24px 0 40px !important;
+            padding: 24px 20px 40px !important;
             flex-wrap: wrap !important;
             gap: 24px !important;
           }
-          .main-stat-num {
-            font-size: 24px !important;
-          }
-          .main-stat-social {
-            display: none !important;
-          }
+          .main-stat-num { font-size: 24px !important; }
+          .main-stat-social { display: none !important; }
         }
 
         @media (max-width: 480px) {
-          .main-nav {
-            padding: 16px 16px !important;
-          }
-          .main-hero {
-            padding: 0 16px !important;
-            padding-top: 80px !important;
-            padding-bottom: 240px !important;
-          }
-          .main-stats-row {
-            margin: 0 16px !important;
-          }
+          .main-nav { padding: 16px 16px !important; }
+          .main-hero { padding: 0 16px !important; padding-top: 80px !important; padding-bottom: 32px !important; }
+          .main-stats-row { padding: 20px 16px 36px !important; }
         }
       `}</style>
 
@@ -682,23 +660,15 @@ const Main = () => {
                 </Link>
               </motion.div>
 
-              <a
-  href="/cv.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  style={{ textDecoration: 'none' }}
->
-  <button style={S.ctaSecondary}>
-    <span>Download CV</span>
-    <motion.span
-      animate={{ x: [0, 4, 0] }}
-      transition={{ repeat: Infinity, duration: 1.5 }}
-    >
-      →
-    </motion.span>
-  </button>
-</a>
-
+              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                <button style={S.ctaSecondary}>
+                  <span>Download CV</span>
+                  <motion.span
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                  >→</motion.span>
+                </button>
+              </a>
             </motion.div>
           </div>
 
@@ -742,10 +712,10 @@ const Main = () => {
         {/* ── STATS ── */}
         <motion.div style={S.statsRow} variants={slideUp} className="main-stats-row">
           {[
-            { num: 15, suffix: '+',    label: 'Projects Completed' },
-            { num: 2,  suffix: ' + yrs', label: 'Experience' },
-            { num: 98, suffix: '%',    label: 'Client Satisfaction' },
-            { num: 12, suffix: '+',    label: 'Technologies' },
+            { num: 15, suffix: '+',     label: 'Projects Completed' },
+            { num: 2,  suffix: '+ yrs', label: 'Experience' },
+            { num: 98, suffix: '%',     label: 'Client Satisfaction' },
+            { num: 12, suffix: '+',     label: 'Technologies' },
           ].map((s) => (
             <div key={s.label} style={S.statItem}>
               <span style={S.statNum} className="main-stat-num"><Counter to={s.num} suffix={s.suffix} /></span>
