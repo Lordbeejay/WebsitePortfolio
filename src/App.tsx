@@ -1,8 +1,6 @@
 import React from 'react';
-
+import Contact from './Pages/Contact';
 import  Skills from './Pages/Skills';
-import { Navbar } from './Components/navbar';
-import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import About from './Pages/About';
 import Main from './Pages/main';
@@ -16,12 +14,13 @@ const App: React.FC = () => {
       overflow: 'hidden',
       boxSizing: 'border-box'
     }}>
-      <Navbar/>
+      
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/skills" element={<Skills />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Project />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </main>
   );
